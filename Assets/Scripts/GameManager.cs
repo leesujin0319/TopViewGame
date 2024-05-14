@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Text characterNameTexts; // 캐릭터 위에 띄울 이름을 표시하는 Text 배열
     public FollowCamera followCamera; // FollowCamera 스크립트에 접근하기 위한 변수
     public GameObject changePanel;
+    public GameObject characterPanel;
     public InputField playerChangeNameInput;
     public GameObject[] characterPrefabs; // 활성화할 캐릭터 프리팹 배열
 
@@ -41,6 +42,12 @@ public class GameManager : MonoBehaviour
         changePanel.SetActive(true);
     }
 
+
+    public void ActiveCharacterPanel()
+    {
+        characterPanel.SetActive(true);
+    }
+
     public void ChangeNickName()
     {
         string newname = playerChangeNameInput.text;
@@ -48,5 +55,12 @@ public class GameManager : MonoBehaviour
         characterNameTexts.text = newname;
         changePanel.SetActive(false);
 
+    }
+
+    public void ChangeCharacter(int index)
+    {
+         PlayerPrefs.SetInt("SelectedCharacterIndex", index);
+        characterPrefabs[index].SetActive(true);
+        characterPanel.SetActive(false);
     }
 }
